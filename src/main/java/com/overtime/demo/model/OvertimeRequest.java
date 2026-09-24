@@ -27,7 +27,7 @@ public class OvertimeRequest {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     
     @ManyToOne 
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
@@ -38,11 +38,12 @@ public class OvertimeRequest {
     private Employee submittedBy;
     
     private LocalDate date;
-    private LocalTime start_time;
-    private LocalTime end_time;
-    private float total_hour;
-    private float overtime_pay;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private Float totalHour;
+    private Float overtimePay;
     private String reason;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private String status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

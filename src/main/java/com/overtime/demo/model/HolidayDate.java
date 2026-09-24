@@ -21,18 +21,18 @@ import lombok.NoArgsConstructor;
 @Builder 
 @Data 
 public class HolidayDate {
-    public HolidayDate(LocalDate holiday_date, String description) {
-        this.holiday_date = holiday_date;
+    public HolidayDate(LocalDate holidayDate, String description) {
+        this.holidayDate = holidayDate;
         this.description = description;
     }
     
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private LocalDate holiday_date;
+    private Integer id;
+    private LocalDate holidayDate;
     private String description;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     
 }

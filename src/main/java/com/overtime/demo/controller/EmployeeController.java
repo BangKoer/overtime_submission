@@ -11,6 +11,7 @@ import com.overtime.demo.service.EmployeeService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,12 +27,12 @@ public class EmployeeController {
 
     @GetMapping("employees")
     public ResponseEntity<Object> getAll() {
-        return Response.generate(employeeService.getAllEmployee(), "Success Retrieve Data");
+        return Response.generate(employeeService.getAllEmployee(), "Success Retrieve Data", HttpStatus.OK);
     }
 
     @GetMapping("employee/{id}")
     public ResponseEntity<Object> getEmployee(@PathVariable(name = "id") int id) {
-        return Response.generate(employeeService.getEmployee(id), "Success Retrieve Data");
+        return Response.generate(employeeService.getEmployee(id), "Success Retrieve Data", HttpStatus.OK);
     }
 
 }

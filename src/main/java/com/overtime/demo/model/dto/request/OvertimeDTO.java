@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @Data 
 public class OvertimeDTO {
-    private int employee_id;
-    private int submitted_by_id;
+    private Integer employee_id;
+    private Integer submitted_by_id;
     private LocalDate date;
     private LocalTime start_time; 
     private LocalTime end_time;

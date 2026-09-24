@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @Data 
 public class EmployeeDTO {
-    private int id;
+    private Integer id;
     private String name;
-    private float basic_salary;
+    private Float basic_salary;
     private String department;
 }

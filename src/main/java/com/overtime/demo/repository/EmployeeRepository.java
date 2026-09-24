@@ -17,7 +17,7 @@ import com.overtime.demo.model.dto.response.EmployeeDTO;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query("""
             SELECT
-                new com.overtime.demo.model.dto.response.EmployeeDTO(e.id, e.name, e.basic_salary, d.name)
+                new com.overtime.demo.model.dto.response.EmployeeDTO(e.id, e.name, e.basicSalary, d.name)
                 FROM Employee e
                 JOIN e.department d
                 """)
@@ -25,7 +25,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     
     @Query("""
             SELECT
-                new com.overtime.demo.model.dto.response.EmployeeDTO(e.id, e.name, e.basic_salary, d.name)
+                new com.overtime.demo.model.dto.response.EmployeeDTO(e.id, e.name, e.basicSalary, d.name)
                 FROM Employee e
                 JOIN e.department d WHERE e.id = ?1
                 """)

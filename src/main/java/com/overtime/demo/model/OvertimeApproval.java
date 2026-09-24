@@ -25,7 +25,7 @@ public class OvertimeApproval {
     
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     
     @ManyToOne
     @JoinColumn(name = "overtime_id", referencedColumnName = "id")
@@ -39,6 +39,6 @@ public class OvertimeApproval {
     private String status;
     private LocalDateTime date;
     private String notes;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

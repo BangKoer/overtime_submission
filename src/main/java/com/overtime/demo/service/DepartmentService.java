@@ -19,8 +19,8 @@ public class DepartmentService {
     public Department createNewDepartment(DepartmentDTO requestDTO){
         Department department = Department.builder()
                                 .name(requestDTO.getName())
-                                .created_at(LocalDateTime.now())
-                                .updated_at(LocalDateTime.now())
+                                .createdAt(LocalDateTime.now())
+                                .updatedAt(LocalDateTime.now())
                                 .build();
         return departmentRepository.save(department);
     }

@@ -25,12 +25,12 @@ public class Employee {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
-    private float basic_salary;
+    private Float basicSalary;
 
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
     @ManyToOne 
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
