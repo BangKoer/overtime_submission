@@ -1,5 +1,7 @@
 package com.overtime.demo.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +12,13 @@ import com.overtime.demo.model.OvertimeApproval;
 
 @Repository 
 public interface OvertimeApproveRepository extends JpaRepository<OvertimeApproval, Integer> {
+    
+    boolean existsByOvertimeRequestId(Integer overtimeId);
+
+    void deleteByOvertimeRequestId(Integer overtimeId);
+
+    List<OvertimeApproval> findByOvertimeRequestId(Integer id);
+    
     @Modifying 
     @Query(value = "CALL sp_approval_overtime(:p_overtime_id, :p_approver_id, :p_level, :p_status, :p_notes)", nativeQuery = true)
     public void addApproval(
@@ -19,4 +28,6 @@ public interface OvertimeApproveRepository extends JpaRepository<OvertimeApprova
         @Param("p_status") String status,
         @Param("p_notes") String notes
     );
+
+    
 }

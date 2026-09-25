@@ -13,6 +13,7 @@ import com.overtime.demo.service.ViewOvertimeRequestService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +40,11 @@ public class OvertimeReqController {
     @GetMapping("OvertimeReqs/sup/{id}")
     public ResponseEntity<Object> getMethodName(@PathVariable(name = "id") int id, @RequestParam(name = "status") String status) {
         return Response.generate(viewOvertimeRequestService.getOvertimeRequestBySupIdAndStatus(id, status),"Success", HttpStatus.OK);
+    }
+
+    @DeleteMapping("OvertimeReqs/delete/{id}")
+    public ResponseEntity<Object> postMethodName(@PathVariable(name = "id") int id) {
+        return Response.generate(overtimeReqService.deleteOvertimeReq(id), HttpStatus.OK);
     }
     
 

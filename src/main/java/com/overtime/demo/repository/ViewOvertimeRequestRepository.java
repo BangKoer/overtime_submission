@@ -13,4 +13,5 @@ public interface ViewOvertimeRequestRepository extends JpaRepository<ViewOvertim
     List<ViewOvertimeRequests> findBySupervisorIdAndRequestStatus(int supervisor_id ,String requestStatus);
     
     List<ViewOvertimeRequests> findByRequestStatus(String requestStatus);
+    
 }
