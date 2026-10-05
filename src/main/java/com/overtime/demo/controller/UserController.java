@@ -8,21 +8,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.overtime.demo.helper.Response;
 import com.overtime.demo.model.dto.request.UserDTO;
+import com.overtime.demo.model.dto.response.LoginResDTO;
 import com.overtime.demo.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-@RestController 
+@RestController
 @RequestMapping("api")
 public class UserController {
-    @Autowired 
+    @Autowired
     private UserService userService;
 
     @PostMapping("user/register")
     public ResponseEntity<Object> register(@RequestBody UserDTO userDTO) {
-        return Response.generate(userService.register(userDTO), "Success", HttpStatus.OK);
+        return Response.generate(userService.register(userDTO), HttpStatus.OK);
     }
-    
+
+    @PostMapping("user/login")
+    public ResponseEntity<Object> login(@RequestBody UserDTO userDTO) {
+        LoginResDTO loginResDTO = userService.login(userDTO);
+        return Response.generate(loginResDTO, "Login Successfull", HttpStatus.OK);
+
+    }
+
 }

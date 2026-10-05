@@ -82,4 +82,27 @@ public class ViewOvertimeRequestService {
                         vw.getRequestStatus()))
                 .collect(Collectors.toList());
     }
+
+    public List<OvertimeReqDTO> getOvertimeRequestByStatus(String status){
+        List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository.findByRequestStatus(status);
+        return overtimeRequests.stream()
+                .map(vw -> new OvertimeReqDTO(
+                   vw.getOvertimeId(),
+                        vw.getOvertimeDate(),
+                        vw.getEmployeeId(),
+                        vw.getEmployeeName(),
+                        vw.getSubmitterId(),
+                        vw.getSubmittedByName(),
+                        vw.getSupervisorId(),
+                        vw.getSupervisorName(),
+                        vw.getDepartmentId(),
+                        vw.getDepartmentName(),
+                        vw.getStartTime(),
+                        vw.getEndTime(),
+                        vw.getTotalHours(),
+                        vw.getOvertimePay(),
+                        vw.getReason(),
+                        vw.getRequestStatus()))
+                .collect(Collectors.toList());
+    }
 }

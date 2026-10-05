@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class OvertimeApproveDTO {
     private Integer overtime_id;
     private Integer approver_id;
-    private String level;       // value : (1: Manager, 2: Finance)
+    // private String level;       // value : (1: Manager, 2: Finance)
     private String status;      // value : ("Approved", "Rejected")
     private String notes;
 

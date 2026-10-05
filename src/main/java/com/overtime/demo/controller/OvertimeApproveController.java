@@ -3,6 +3,8 @@ package com.overtime.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,13 +44,13 @@ public class OvertimeApproveController {
 
     @PostMapping("OvertimeApprove/addApproveOvertime")
     public ResponseEntity<Object> createOvertimeApproval(@RequestBody OvertimeApproveDTO overtimeApproveDTO) {
-        String res = overtimeApproveService.addOvertimeApproval(overtimeApproveDTO);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String res = overtimeApproveService.addOvertimeApproval(overtimeApproveDTO, authentication);
         return Response.generate(res, HttpStatus.OK);
     }
 
     @DeleteMapping("OvertimeApprove/delete/{overtimeId}")
     public ResponseEntity<Object> deleteApprovalByOvrId(@PathVariable(name = "overtimeId") int overtimeId) {
-        //TODO: process POST request
         return Response.generate(overtimeApproveService.deleteOvertimeApprovalByOvrId(overtimeId), HttpStatus.OK);
     }
     

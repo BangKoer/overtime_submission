@@ -31,4 +31,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
                 """)
     public EmployeeDTO getEmployee(int id);
     
+    @Query("SELECT COUNT(e) > 0 FROM Employee e Where e.supervisor.id = :empId")
+    boolean isManager(@Param("empId") Integer empId);
+    
 }

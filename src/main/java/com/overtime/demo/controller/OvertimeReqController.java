@@ -38,8 +38,13 @@ public class OvertimeReqController {
     }
 
     @GetMapping("OvertimeReqs/sup/{id}")
-    public ResponseEntity<Object> getMethodName(@PathVariable(name = "id") int id, @RequestParam(name = "status") String status) {
+    public ResponseEntity<Object> getOvrBySupAndId(@PathVariable(name = "id") int id, @RequestParam(name = "status") String status) {
         return Response.generate(viewOvertimeRequestService.getOvertimeRequestBySupIdAndStatus(id, status),"Success", HttpStatus.OK);
+    }
+
+    @GetMapping("OvertimeReqs/status")
+    public ResponseEntity<Object> getOvrByStatus(@RequestParam(name = "status") String status) {
+        return Response.generate(viewOvertimeRequestService.getOvertimeRequestByStatus(status),"Success", HttpStatus.OK);
     }
 
     @DeleteMapping("OvertimeReqs/delete/{id}")
@@ -47,7 +52,6 @@ public class OvertimeReqController {
         return Response.generate(overtimeReqService.deleteOvertimeReq(id), HttpStatus.OK);
     }
     
-
     @PostMapping("OvertimeReqs/addOvertimeReq")
     public ResponseEntity<Object> createOvertimeReq(@RequestBody OvertimeDTO overtimeDTO) {
         String res = overtimeReqService.addOvertimeReq(overtimeDTO);
