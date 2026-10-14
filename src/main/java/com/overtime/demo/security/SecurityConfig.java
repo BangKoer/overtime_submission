@@ -1,5 +1,8 @@
 package com.overtime.demo.security;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
@@ -31,7 +35,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-
+                .cors().and()
                 .csrf(crsf -> crsf.disable())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -39,7 +43,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/api/user/**", "/error").permitAll();
 
-                    auth.antMatchers("/api/OvertimeReqs/**").hasAnyRole("EMPLOYEE", "MANAGER");
+                    auth.antMatchers("/api/overtime-request/**", "/error").hasAnyRole("EMPLOYEE", "MANAGER");
 
                     auth.antMatchers("/api/OvertimeApproves/**", "/error").hasAnyRole("MANAGER", "FINANCE");
 
@@ -51,17 +55,32 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean 
-    public CorsFilter corsImplement(){
-        UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+    // @Bean 
+    // public CorsFilter corsImplement(){
+    //     UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
+    //     CorsConfiguration configuration = new CorsConfiguration();
+
+    //     configuration.setAllowCredentials(true);
+    //     configuration.addAllowedOrigin("http://localhost:3000");        // full URL Permission that can consume API
+    //     configuration.addAllowedHeader("*");
+    //     configuration.addAllowedMethod("*");
+    //     urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
+
+    //     return new CorsFilter(urlBasedCorsConfigurationSource);
+    // }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
+        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("http://localhost:8080");        // full URL Permission that can consume API
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
 
-        return new CorsFilter(urlBasedCorsConfigurationSource);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 }

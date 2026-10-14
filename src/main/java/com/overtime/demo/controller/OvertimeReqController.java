@@ -27,32 +27,37 @@ public class OvertimeReqController {
     @Autowired 
     private ViewOvertimeRequestService viewOvertimeRequestService;
 
-    @GetMapping("OvertimeReqs")
+    @GetMapping("overtime-requests")
     public ResponseEntity<Object> getAllOvertime() {
         return Response.generate(viewOvertimeRequestService.getAllOvertimeRequest(), "Success", HttpStatus.OK);
     }
 
-    @GetMapping("OvertimeReqs/{id}")
+    @GetMapping("overtime-request/{id}")
     public ResponseEntity<Object> getOvertimeReqById(@PathVariable(name = "id") int id) {
         return Response.generate(viewOvertimeRequestService.getOvertimeRequestById(id),"Success", HttpStatus.OK);
     }
 
-    @GetMapping("OvertimeReqs/sup/{id}")
+    @GetMapping("overtime-request/emp/{id}")
+    public ResponseEntity<Object> getOvertimeReqByEmployeeId(@PathVariable(name = "id") int id) {
+        return Response.generate(viewOvertimeRequestService.getOvertimeRequestByEmployeeId(id),"Success", HttpStatus.OK);
+    }
+
+    @GetMapping("overtime-request/sup/{id}")
     public ResponseEntity<Object> getOvrBySupAndId(@PathVariable(name = "id") int id, @RequestParam(name = "status") String status) {
         return Response.generate(viewOvertimeRequestService.getOvertimeRequestBySupIdAndStatus(id, status),"Success", HttpStatus.OK);
     }
 
-    @GetMapping("OvertimeReqs/status")
+    @GetMapping("overtime-request/status")
     public ResponseEntity<Object> getOvrByStatus(@RequestParam(name = "status") String status) {
         return Response.generate(viewOvertimeRequestService.getOvertimeRequestByStatus(status),"Success", HttpStatus.OK);
     }
 
-    @DeleteMapping("OvertimeReqs/delete/{id}")
+    @DeleteMapping("overtime-request/delete/{id}")
     public ResponseEntity<Object> postMethodName(@PathVariable(name = "id") int id) {
         return Response.generate(overtimeReqService.deleteOvertimeReq(id), HttpStatus.OK);
     }
     
-    @PostMapping("OvertimeReqs/addOvertimeReq")
+    @PostMapping("overtime-request")
     public ResponseEntity<Object> createOvertimeReq(@RequestBody OvertimeDTO overtimeDTO) {
         String res = overtimeReqService.addOvertimeReq(overtimeDTO);
         return Response.generate(res, HttpStatus.OK);

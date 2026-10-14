@@ -13,96 +13,121 @@ import com.overtime.demo.vw.ViewOvertimeRequests;
 
 @Service
 public class ViewOvertimeRequestService {
-    @Autowired
-    private ViewOvertimeRequestRepository viewOvertimeRepository;
+        @Autowired
+        private ViewOvertimeRequestRepository viewOvertimeRepository;
 
-    public List<OvertimeReqDTO> getAllOvertimeRequest() {
-        List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository.findAll();
-        return overtimeRequests.stream()
-                .map(vw -> new OvertimeReqDTO(
-                        vw.getOvertimeId(),
-                        vw.getOvertimeDate(),
-                        vw.getEmployeeId(),
-                        vw.getEmployeeName(),
-                        vw.getSubmitterId(),
-                        vw.getSubmittedByName(),
-                        vw.getSupervisorId(),
-                        vw.getSupervisorName(),
-                        vw.getDepartmentId(),
-                        vw.getDepartmentName(),
-                        vw.getStartTime(),
-                        vw.getEndTime(),
-                        vw.getTotalHours(),
-                        vw.getOvertimePay(),
-                        vw.getReason(),
-                        vw.getRequestStatus()))
-                .collect(Collectors.toList());
-    }
+        public List<OvertimeReqDTO> getAllOvertimeRequest() {
+                List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository.findAll();
+                return overtimeRequests.stream()
+                                .map(vw -> new OvertimeReqDTO(
+                                                vw.getOvertimeId(),
+                                                vw.getOvertimeDate(),
+                                                vw.getEmployeeId(),
+                                                vw.getEmployeeName(),
+                                                vw.getSubmitterId(),
+                                                vw.getSubmittedByName(),
+                                                vw.getSupervisorId(),
+                                                vw.getSupervisorName(),
+                                                vw.getDepartmentId(),
+                                                vw.getDepartmentName(),
+                                                vw.getStartTime(),
+                                                vw.getEndTime(),
+                                                vw.getTotalHours(),
+                                                vw.getOvertimePay(),
+                                                vw.getReason(),
+                                                vw.getRequestStatus()))
+                                .collect(Collectors.toList());
+        }
 
-    public OvertimeReqDTO getOvertimeRequestById(int id) {
-        ViewOvertimeRequests overtimeRequest = viewOvertimeRepository.findById(id).orElse(null);
-        return new OvertimeReqDTO(
-                overtimeRequest.getOvertimeId(),
-                overtimeRequest.getOvertimeDate(),
-                overtimeRequest.getEmployeeId(),
-                overtimeRequest.getEmployeeName(),
-                overtimeRequest.getSubmitterId(),
-                overtimeRequest.getSubmittedByName(),
-                overtimeRequest.getSupervisorId(),
-                overtimeRequest.getSupervisorName(),
-                overtimeRequest.getDepartmentId(),
-                overtimeRequest.getDepartmentName(),
-                overtimeRequest.getStartTime(),
-                overtimeRequest.getEndTime(),
-                overtimeRequest.getTotalHours(),
-                overtimeRequest.getOvertimePay(),
-                overtimeRequest.getReason(),
-                overtimeRequest.getRequestStatus());
-    }
+        public OvertimeReqDTO getOvertimeRequestById(int id) {
+                ViewOvertimeRequests overtimeRequest = viewOvertimeRepository.findById(id).orElseThrow(
+                                () -> new IllegalStateException("Operation Failed: Overtime ID Not Found"));
+                return new OvertimeReqDTO(
+                                overtimeRequest.getOvertimeId(),
+                                overtimeRequest.getOvertimeDate(),
+                                overtimeRequest.getEmployeeId(),
+                                overtimeRequest.getEmployeeName(),
+                                overtimeRequest.getSubmitterId(),
+                                overtimeRequest.getSubmittedByName(),
+                                overtimeRequest.getSupervisorId(),
+                                overtimeRequest.getSupervisorName(),
+                                overtimeRequest.getDepartmentId(),
+                                overtimeRequest.getDepartmentName(),
+                                overtimeRequest.getStartTime(),
+                                overtimeRequest.getEndTime(),
+                                overtimeRequest.getTotalHours(),
+                                overtimeRequest.getOvertimePay(),
+                                overtimeRequest.getReason(),
+                                overtimeRequest.getRequestStatus());
+        }
 
-    public List<OvertimeReqDTO> getOvertimeRequestBySupIdAndStatus(int id, String status) {
-        List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository.findBySupervisorIdAndRequestStatus(id, status);
-        return overtimeRequests.stream()
-                .map(vw -> new OvertimeReqDTO(
-                        vw.getOvertimeId(),
-                        vw.getOvertimeDate(),
-                        vw.getEmployeeId(),
-                        vw.getEmployeeName(),
-                        vw.getSubmitterId(),
-                        vw.getSubmittedByName(),
-                        vw.getSupervisorId(),
-                        vw.getSupervisorName(),
-                        vw.getDepartmentId(),
-                        vw.getDepartmentName(),
-                        vw.getStartTime(),
-                        vw.getEndTime(),
-                        vw.getTotalHours(),
-                        vw.getOvertimePay(),
-                        vw.getReason(),
-                        vw.getRequestStatus()))
-                .collect(Collectors.toList());
-    }
+        public List<OvertimeReqDTO> getOvertimeRequestByEmployeeId(int id) {
+                List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository.findByEmployeeId(id);
+                return overtimeRequests.stream()
+                                .map(vw -> new OvertimeReqDTO(
+                                                vw.getOvertimeId(),
+                                                vw.getOvertimeDate(),
+                                                vw.getEmployeeId(),
+                                                vw.getEmployeeName(),
+                                                vw.getSubmitterId(),
+                                                vw.getSubmittedByName(),
+                                                vw.getSupervisorId(),
+                                                vw.getSupervisorName(),
+                                                vw.getDepartmentId(),
+                                                vw.getDepartmentName(),
+                                                vw.getStartTime(),
+                                                vw.getEndTime(),
+                                                vw.getTotalHours(),
+                                                vw.getOvertimePay(),
+                                                vw.getReason(),
+                                                vw.getRequestStatus()))
+                                .collect(Collectors.toList());
+        }
 
-    public List<OvertimeReqDTO> getOvertimeRequestByStatus(String status){
-        List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository.findByRequestStatus(status);
-        return overtimeRequests.stream()
-                .map(vw -> new OvertimeReqDTO(
-                   vw.getOvertimeId(),
-                        vw.getOvertimeDate(),
-                        vw.getEmployeeId(),
-                        vw.getEmployeeName(),
-                        vw.getSubmitterId(),
-                        vw.getSubmittedByName(),
-                        vw.getSupervisorId(),
-                        vw.getSupervisorName(),
-                        vw.getDepartmentId(),
-                        vw.getDepartmentName(),
-                        vw.getStartTime(),
-                        vw.getEndTime(),
-                        vw.getTotalHours(),
-                        vw.getOvertimePay(),
-                        vw.getReason(),
-                        vw.getRequestStatus()))
-                .collect(Collectors.toList());
-    }
+        public List<OvertimeReqDTO> getOvertimeRequestBySupIdAndStatus(int id, String status) {
+                List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository
+                                .findBySupervisorIdAndRequestStatus(id, status);
+                return overtimeRequests.stream()
+                                .map(vw -> new OvertimeReqDTO(
+                                                vw.getOvertimeId(),
+                                                vw.getOvertimeDate(),
+                                                vw.getEmployeeId(),
+                                                vw.getEmployeeName(),
+                                                vw.getSubmitterId(),
+                                                vw.getSubmittedByName(),
+                                                vw.getSupervisorId(),
+                                                vw.getSupervisorName(),
+                                                vw.getDepartmentId(),
+                                                vw.getDepartmentName(),
+                                                vw.getStartTime(),
+                                                vw.getEndTime(),
+                                                vw.getTotalHours(),
+                                                vw.getOvertimePay(),
+                                                vw.getReason(),
+                                                vw.getRequestStatus()))
+                                .collect(Collectors.toList());
+        }
+
+        public List<OvertimeReqDTO> getOvertimeRequestByStatus(String status) {
+                List<ViewOvertimeRequests> overtimeRequests = viewOvertimeRepository.findByRequestStatus(status);
+                return overtimeRequests.stream()
+                                .map(vw -> new OvertimeReqDTO(
+                                                vw.getOvertimeId(),
+                                                vw.getOvertimeDate(),
+                                                vw.getEmployeeId(),
+                                                vw.getEmployeeName(),
+                                                vw.getSubmitterId(),
+                                                vw.getSubmittedByName(),
+                                                vw.getSupervisorId(),
+                                                vw.getSupervisorName(),
+                                                vw.getDepartmentId(),
+                                                vw.getDepartmentName(),
+                                                vw.getStartTime(),
+                                                vw.getEndTime(),
+                                                vw.getTotalHours(),
+                                                vw.getOvertimePay(),
+                                                vw.getReason(),
+                                                vw.getRequestStatus()))
+                                .collect(Collectors.toList());
+        }
 }

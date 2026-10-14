@@ -109,7 +109,6 @@ public class OvertimeApproveService {
         }
 
         overtimeApproveRepository.deleteByOvertimeRequestId(overtimeId);
-
         overtimeRequest.setStatus("Awaiting Manager Approval (Lv1)");
         overtimeReqRepository.save(overtimeRequest);
 
