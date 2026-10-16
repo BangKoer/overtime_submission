@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 
 @Entity 
 @Table(name = "tb_tr_overtime_approval")
-@AllArgsConstructor 
+// @AllArgsConstructor 
 @NoArgsConstructor 
 @Data 
 @Builder 
@@ -41,4 +41,19 @@ public class OvertimeApproval {
     private String notes;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    
+    public OvertimeApproval(Integer id, OvertimeRequest overtimeRequest, Employee approver, String level, String status,
+            LocalDateTime date, String notes, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        this.id = id;
+        this.overtimeRequest = overtimeRequest;
+        this.approver = approver;
+        this.level = level;
+        this.status = status;
+        this.date = date;
+        this.notes = notes;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    
 }

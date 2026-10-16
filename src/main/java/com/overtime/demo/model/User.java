@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 
 @Entity 
 @Table(name = "tb_m_user")
-@AllArgsConstructor 
+// @AllArgsConstructor 
 @NoArgsConstructor 
 @Builder 
 @Data 
@@ -54,4 +54,16 @@ public class User {
     public void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
+    public User(Integer id, String email, String password, LocalDateTime createdAt, LocalDateTime updatedAt,
+            Employee employee) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.employee = employee;
+    }
+
+    
 }

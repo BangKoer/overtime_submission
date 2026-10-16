@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.overtime.demo.model.Department;
 import com.overtime.demo.model.Employee;
 import com.overtime.demo.model.dto.response.EmployeeDTO;
 
@@ -34,4 +35,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query("SELECT COUNT(e) > 0 FROM Employee e Where e.supervisor.id = :empId")
     boolean isManager(@Param("empId") Integer empId);
     
+    @Query("""
+            SELECT
+                new com.overtime.demo.model.dto.response.EmployeeDTO(e.id, e.name, e.basicSalary, d.name)
+                FROM Employee e
+                JOIN e.department d 
+                WHERE d.id = :departmentId
+            """)
+    List<EmployeeDTO> findByDepartmentId(@Param("departmentId") Integer departmentId);  
 }

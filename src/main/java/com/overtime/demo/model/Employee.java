@@ -15,15 +15,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity 
-@Table(name="tb_m_employee")
-@AllArgsConstructor 
-@NoArgsConstructor 
-@Builder 
-@Data 
+@Entity
+@Table(name = "tb_m_employee")
+// @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Employee {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
@@ -31,13 +31,24 @@ public class Employee {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    
-    @ManyToOne 
+
+    @ManyToOne
     @JoinColumn(name = "supervisor_id", referencedColumnName = "id")
     private Employee supervisor;
-    
-    @ManyToOne 
+
+    @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
+
+    public Employee(Integer id, String name, Float basicSalary, LocalDateTime createdAt, LocalDateTime updatedAt,
+            Employee supervisor, Department department) {
+        this.id = id;
+        this.name = name;
+        this.basicSalary = basicSalary;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.supervisor = supervisor;
+        this.department = department;
+    }
 
 }

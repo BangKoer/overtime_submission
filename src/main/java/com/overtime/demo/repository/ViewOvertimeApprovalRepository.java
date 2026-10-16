@@ -10,4 +10,6 @@ import com.overtime.demo.vw.ViewOvertimeApproval;
 @Repository 
 public interface ViewOvertimeApprovalRepository extends JpaRepository<ViewOvertimeApproval, Integer> {
     List<ViewOvertimeApproval> findByOvertimeId(Integer overtimeId);
+
+    List<ViewOvertimeApproval> findByApproverId(Integer approverId);
 }

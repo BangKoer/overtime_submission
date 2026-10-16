@@ -72,12 +72,13 @@ public class UserService {
         }
         
         List<String> roles = EmployeeRole.getRole(resultEmp, employeeRepository);
-        String token = jwtUtils.generateToken(resultEmp.getName(), resultUser.getEmail(), resultEmp.getId(), roles);
+        String token = jwtUtils.generateToken(resultEmp.getName(), resultUser.getEmail(), resultEmp.getId(), resultEmp.getDepartment().getId(), roles);
 
         return LoginResDTO.builder()
                 .token(token)
                 .type("Bearer")
                 .employeeId(resultEmp.getId())
+                .departmentId(resultEmp.getDepartment().getId())
                 .name(resultEmp.getName())
                 .email(resultUser.getEmail())
                 .roles(roles)

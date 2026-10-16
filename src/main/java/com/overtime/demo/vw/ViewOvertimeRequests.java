@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @Entity 
 @Table(name = "vw_detailed_overtime_request")
 @Immutable 
-@AllArgsConstructor 
-@NoArgsConstructor 
+@NoArgsConstructor
+// @AllArgsConstructor  
 @Getter  
 public class ViewOvertimeRequests {
 
@@ -40,4 +40,26 @@ public class ViewOvertimeRequests {
     private Float overtimePay;
     private String reason;
     private String requestStatus;
+    
+    public ViewOvertimeRequests(int overtimeId, LocalDate overtimeDate, Integer employeeId, String employeeName,
+            Integer submitterId, String submittedByName, Integer supervisorId, String supervisorName,
+            Integer departmentId, String departmentName, LocalTime startTime, LocalTime endTime, Integer totalHours,
+            Float overtimePay, String reason, String requestStatus) {
+        this.overtimeId = overtimeId;
+        this.overtimeDate = overtimeDate;
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.submitterId = submitterId;
+        this.submittedByName = submittedByName;
+        this.supervisorId = supervisorId;
+        this.supervisorName = supervisorName;
+        this.departmentId = departmentId;
+        this.departmentName = departmentName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.totalHours = totalHours;
+        this.overtimePay = overtimePay;
+        this.reason = reason;
+        this.requestStatus = requestStatus;
+    }
 }

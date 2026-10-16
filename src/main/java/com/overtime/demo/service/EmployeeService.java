@@ -29,5 +29,14 @@ public class EmployeeService {
         return employeeRepository.getEmployee(id);
     }
 
+    public List<EmployeeDTO> getEmployeesByDepartmentId(Integer id){
+        try {
+            return employeeRepository.findByDepartmentId(id);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
     
 }

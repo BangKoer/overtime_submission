@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity 
 @Table(name = "tb_m_holiday_date")
-@AllArgsConstructor 
+// @AllArgsConstructor 
 @NoArgsConstructor 
 @Builder 
 @Data 
@@ -33,6 +33,16 @@ public class HolidayDate {
     private String description;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    public HolidayDate(Integer id, LocalDate holidayDate, String description, LocalDateTime createdAt,
+            LocalDateTime updatedAt) {
+        this.id = id;
+        this.holidayDate = holidayDate;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
+
+    
     
 }

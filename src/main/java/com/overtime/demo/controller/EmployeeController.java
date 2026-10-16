@@ -25,7 +25,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("employees")
+    @GetMapping("employee")
     public ResponseEntity<Object> getAll() {
         return Response.generate(employeeService.getAllEmployee(), "Success Retrieve Data", HttpStatus.OK);
     }
@@ -34,5 +34,11 @@ public class EmployeeController {
     public ResponseEntity<Object> getEmployee(@PathVariable(name = "id") int id) {
         return Response.generate(employeeService.getEmployee(id), "Success Retrieve Data", HttpStatus.OK);
     }
+
+    @GetMapping("employee/dpt/{id}")
+    public ResponseEntity<Object> getMethodName(@PathVariable(name = "id") Integer id) {
+        return Response.generate(employeeService.getEmployeesByDepartmentId(id), "Success Retrieve Data", HttpStatus.OK);
+    }
+    
 
 }

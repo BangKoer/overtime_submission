@@ -43,9 +43,11 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/api/user/**", "/error").permitAll();
 
+                    auth.antMatchers("/api/employee/**", "/error").hasAnyRole("EMPLOYEE");
+
                     auth.antMatchers("/api/overtime-request/**", "/error").hasAnyRole("EMPLOYEE", "MANAGER");
 
-                    auth.antMatchers("/api/OvertimeApproves/**", "/error").hasAnyRole("MANAGER", "FINANCE");
+                    auth.antMatchers("/api/overtime-approval/**", "/error").hasAnyRole("MANAGER", "FINANCE");
 
                     auth.anyRequest().authenticated();
                 });

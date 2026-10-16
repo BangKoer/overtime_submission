@@ -4,13 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor 
+// @AllArgsConstructor 
 @NoArgsConstructor 
 @Data 
 public class UserDTO {
     private Integer id;
     private String email;
     private String password;
+
+    
+    public UserDTO(Integer id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
+
 
     public UserDTO(String email, String password) {
         this.email = email;

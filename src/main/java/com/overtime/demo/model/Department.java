@@ -15,18 +15,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity 
-@Table(name="tb_m_department")
-@AllArgsConstructor 
-@NoArgsConstructor 
-@Builder 
-@Data 
+@Entity
+@Table(name = "tb_m_department")
+// @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Department {
     public Department(String name) {
         this.name = name;
     }
-    
-    @Id 
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
@@ -35,5 +35,14 @@ public class Department {
 
     @OneToMany(mappedBy = "department")
     public List<Employee> employees;
+
+    public Department(Integer id, String name, LocalDateTime createdAt, LocalDateTime updatedAt,
+            List<Employee> employees) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.employees = employees;
+    }
 
 }

@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor 
+// @AllArgsConstructor 
 @NoArgsConstructor 
 @Data 
 public class DepartmentDTO {
     private String name;
+
+    public DepartmentDTO(String name) {
+        this.name = name;
+    }
 }

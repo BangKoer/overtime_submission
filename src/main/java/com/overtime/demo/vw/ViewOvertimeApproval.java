@@ -1,6 +1,7 @@
 package com.overtime.demo.vw;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Entity 
 @Table(name = "vw_detailed_approval")
 @Immutable 
-@AllArgsConstructor 
 @NoArgsConstructor 
 @Getter 
 public class ViewOvertimeApproval {
@@ -33,4 +33,5 @@ public class ViewOvertimeApproval {
     private Float overtimePay;
     private String reason;
     private String status;
+    private LocalDateTime reviewAt;
 }

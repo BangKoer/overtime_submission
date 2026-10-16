@@ -31,25 +31,29 @@ public class OvertimeApproveController {
     @Autowired 
     private ViewOvertimeApprovalService viewOvertimeApprovalService;
 
-    @GetMapping("OvertimeApproves")
+    @GetMapping("overtime-approval")
     public ResponseEntity<Object> getAllApproval() {
         return Response.generate(viewOvertimeApprovalService.getAllOvertimeApproval(), "Success", HttpStatus.OK);
     }
 
-    @GetMapping("OvertimeApproves/{overtimeId}")
-    public ResponseEntity<Object> getMethodName(@PathVariable(name = "overtimeId") int overtime_id) {
+    @GetMapping("overtime-approval/ovr/{overtimeId}")
+    public ResponseEntity<Object> getApprovalByOvertimeId(@PathVariable(name = "overtimeId") int overtime_id) {
         return Response.generate(viewOvertimeApprovalService.getApprovalByOvertimeId(overtime_id), "Success", HttpStatus.OK);
     }
-    
 
-    @PostMapping("OvertimeApprove/addApproveOvertime")
+    @GetMapping("overtime-approval/approver/{approverId}")
+    public ResponseEntity<Object> getApprovalByApproverId(@PathVariable(name = "approverId") int approverId) {
+        return Response.generate(viewOvertimeApprovalService.getApprovalByApproverId(approverId), "Success", HttpStatus.OK);
+    }
+
+    @PostMapping("overtime-approval")
     public ResponseEntity<Object> createOvertimeApproval(@RequestBody OvertimeApproveDTO overtimeApproveDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String res = overtimeApproveService.addOvertimeApproval(overtimeApproveDTO, authentication);
         return Response.generate(res, HttpStatus.OK);
     }
 
-    @DeleteMapping("OvertimeApprove/delete/{overtimeId}")
+    @DeleteMapping("overtime-approval/delete/{overtimeId}")
     public ResponseEntity<Object> deleteApprovalByOvrId(@PathVariable(name = "overtimeId") int overtimeId) {
         return Response.generate(overtimeApproveService.deleteOvertimeApprovalByOvrId(overtimeId), HttpStatus.OK);
     }

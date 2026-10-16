@@ -34,7 +34,7 @@ public class JWTUtils {
     }
 
     // Generate JWT Token
-    public String generateToken(String name, String email, Integer employeeId, List<String> roles) {
+    public String generateToken(String name, String email, Integer employeeId, Integer departmentId, List<String> roles) {
         Date now = new Date();
         Date expirDate = new Date(now.getTime() + jwtExpirationMs);
 
@@ -42,6 +42,7 @@ public class JWTUtils {
                 .setSubject(email)
                 .claim("name", name)
                 .claim("employeeId", employeeId)
+                .claim("departmentId", departmentId)
                 .claim("role", roles)
                 .setIssuedAt(now)
                 .setExpiration(expirDate)
@@ -67,6 +68,16 @@ public class JWTUtils {
                 .parseClaimsJws(token)
                 .getBody();
         return claims.get("employeeId", Integer.class);
+    }
+
+    // Get Department Id from token
+    public Integer getDepartmentIdFromJwtToken(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.get("departmentId", Integer.class);
     }
 
     @SuppressWarnings("unchecked")
